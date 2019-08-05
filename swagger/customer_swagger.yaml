@@ -1,0 +1,193 @@
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: CustomersAPI
+  description: 'Customers API'
+schemes:
+- http
+- https
+consumes:
+- application/json
+produces:
+- application/json
+paths:
+  "/customers":
+    post:
+      description: Creates a customer object
+      summary: Create Customer
+      produces:
+      - application/json
+      parameters:
+      - name: Body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/Customer"
+      responses:
+        201:
+          description: "successful operation"
+          schema:
+            type: "object"
+            items:
+              $ref: "#/definitions/Customer"
+    get:
+      description: Returns the list of customers
+      summary: Get customers
+      produces:
+      - application/json
+      parameters:
+      - name: sortBy
+        in: query
+        required: true
+        type: string
+        enum: 
+          - name
+          - status
+      responses:
+        200:
+          description: "Returns the list of customer"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Customer"
+  "/customers/{customerId}":
+    get:
+      description: 'Get the data of a customer by its id'
+      summary: Get Customer By Id
+      produces:
+      - application/json
+      parameters:
+      - name: customerId
+        in: path
+        required: true
+        type: string
+      responses:
+        200:
+          description: "Returns the data of the customer"
+          schema:
+            type: "object"
+            items:
+              $ref: "#/definitions/Customer"
+    put:
+      description: Updates the status of a customer
+      summary: Update the status of a customer
+      produces:
+      - application/json
+      parameters:
+      - name: customerId
+        in: path
+        required: true
+        type: string
+      - name: Body
+        in: body
+        required: true
+        description: ''
+        schema:
+          "$ref": "#/definitions/Customer"
+      responses:
+        200:
+          description: "Updated the customer object"
+          schema:
+            type: "object"
+            items:
+              $ref: "#/definitions/Customer"
+  "/customers/{customerId}/notes":
+    post:
+      description: Creates a new note for a customer
+      summary: Create Note For Customer
+      produces:
+      - application/json
+      parameters:
+      - name: customerId
+        in: path
+        required: true
+        type: string
+      - name: Body
+        in: body
+        required: true
+        description: ''
+        schema:
+          "$ref": "#/definitions/Note"
+      responses:
+        200:
+          description: "Add note to the customer object"
+          schema:
+            type: "object"
+            items:
+              $ref: "#/definitions/Customer"
+  "/notes/{noteId}":
+    put:
+      description: Updates a note by its id
+      summary: Update a note
+      produces:
+      - application/json
+      parameters:
+      - name: noteId
+        in: path
+        required: true
+        type: string
+      - name: Body
+        in: body
+        required: true
+        description: ''
+        schema:
+          "$ref": "#/definitions/Note"
+      responses:
+        200:
+          description: "Update note in the customer object"
+          schema:
+            type: "object"
+            items:
+              $ref: "#/definitions/Note"
+definitions:
+  Customer:
+    title: PostCustomerRequest
+    example:
+      name: Bnz bank
+      contactPersonName: John Ben
+      contactNumber: '021123456'
+      emailAddress: john@live.com
+      address: 21 Der street
+      status: NON_ACTIVE
+      notes: []
+    type: object
+    properties:
+      name:
+        type: string
+      contactPersonName:
+        type: string
+      contactNumber:
+        type: string
+      emailAddress:
+        type: string
+      address:
+        type: string
+      status:
+        type: string
+        enum:
+        - PROSPECTIVE
+        - NON_ACTIVE
+        - CURRENT
+      notes:
+        type: array
+        items:
+          $ref: "#/definitions/Note"
+    required:
+    - name
+    - contactPersonName
+    - contactNumber
+    - emailAddress
+    - address
+    - status
+    - notes
+    
+  Note:
+    example:
+      content: 'The turnaround was quick for an acquisition of this size, with similar
+        deals often facing much longer periods of regulatory scrutiny. '
+    type: object
+    properties:
+      content:
+        type: string
+    required:
+    - content
