@@ -1,6 +1,7 @@
 package com.bm.company.demoapp.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.apache.commons.lang3.StringUtils;
@@ -53,11 +54,11 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	@Override
 	public Customer getCustomerById(final UUID id) throws ResourceNotFoundException {
-		Customer customer = customerRepository.findOne( id );
-		if(customer == null ) {
+		Optional<Customer> customer = customerRepository.findById(id);
+		if(!customer.isPresent() ) {
 			throw new ResourceNotFoundException("Customer with id " + id + " doesn't exist");
 		}
-		return customer;
+		return customer.get();
 	}
 
 	@Override
@@ -67,17 +68,18 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	@Override
 	public List<Customer> createCustomers(List<Customer> customers) {
-		return (List<Customer>) customerRepository.save(customers);
+		return (List<Customer>) customerRepository.saveAll(customers);
 	}
 	
 	@Override
 	public Customer updateCustomerStatus(final UUID id, CustomerStatus status) throws ResourceNotFoundException {
 		LOGGER.debug("Updating a status of customer {}", id );
-		Customer existingCustomer = customerRepository.findOne(id);
-		if(existingCustomer == null) {
+		Optional<Customer> existingCustomerOptional = customerRepository.findById(id);
+		if(!existingCustomerOptional.isPresent()) {
 			throw new ResourceNotFoundException("Customer with the UUId  "+ id +" doesn't exist");
 		}
-		existingCustomer.setStatus(status);
+		Customer existingCustomer = existingCustomerOptional.get();
+		existingCustomerOptional.get().setStatus(status);
 		return customerRepository.save(existingCustomer);
 	}
 
@@ -87,7 +89,6 @@ public class CustomerServiceImpl implements CustomerService {
 		List<Note> customerNotes =  customer.getNotes(); 
 		customerNotes.add(note);
 		customer.setNotes(customerNotes);
-		
 		return customerRepository.save(customer);
 	}
 

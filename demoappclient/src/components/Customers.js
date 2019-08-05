@@ -138,7 +138,7 @@ import { customerActions } from '../actions/customerActions';
         <Table hover>
             <thead>
               <tr className="react-grid-header">
-                <th>#</th>
+                <th>Customer Id</th>
                 <th>Name</th>
                 <th>Contact Person</th>
                 <th>Status</th>
@@ -159,7 +159,7 @@ import { customerActions } from '../actions/customerActions';
                 <td>{customer.emailAddress}</td>
                 <td>{customer.contactNumber}</td>
                 <td>{customer.address}</td>
-                <td><Moment unix>{customer.creationDate}</Moment></td>
+                <td><Moment>{customer.creationDate}</Moment></td>
               </tr>
             
         )}

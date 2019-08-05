@@ -65,11 +65,11 @@ public class CustomerController extends BaseController{
 		return new ResponseEntity<>( updatedCustomer, HttpStatus.OK);
 	}
 	
-	@PutMapping(value="/{id}/note")
+	@PostMapping(value="/{id}/notes")
 	public ResponseEntity<Customer> createCustomerNotes( @PathVariable(name="id") UUID id, @RequestBody Note note) throws ResourceNotFoundException {
 		LOGGER.debug("Creating notes for customer {} ", id);
 		Customer updatedCustomer = customerFacade.createNotesForCustomer(id, note.getContent());
-		return new ResponseEntity<>( updatedCustomer, HttpStatus.OK) ;
+		return new ResponseEntity<>( updatedCustomer, HttpStatus.CREATED) ;
 	}
 	
 }

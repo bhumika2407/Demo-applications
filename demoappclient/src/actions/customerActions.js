@@ -97,7 +97,7 @@ function getCustomerDetails( customerId ) {
         let data = JSON.stringify({
             content : noteContent
             });   
-        axios.put(globalConstants.REST_API_BASE_URL + '/customers/' + customer.id + '/note', data ,{
+        axios.post(globalConstants.REST_API_BASE_URL + '/customers/' + customer.id + '/notes', data ,{
             headers: {
                 'Content-Type': 'application/json'
             },

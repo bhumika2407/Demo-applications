@@ -1,6 +1,7 @@
 package com.bm.company.demoapp.service.impl;
 
 import java.util.Date;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -38,10 +39,11 @@ public class NotesServiceImpl implements NotesService {
 
 	@Override
 	public Note updateNote(final UUID id, final String content) throws ResourceNotFoundException {
-		Note note = notesRepository.findOne(id);
-		if( note == null) {
+		Optional<Note> noteOptional = notesRepository.findById(id);
+		if( !noteOptional.isPresent()) {
 			throw new ResourceNotFoundException(" Note for the provided id does not exist");
 		}
+		Note note = noteOptional.get();
 		note.setContent(content);
 		note.setModifiedTime(new Date());
 		return notesRepository.save( note );

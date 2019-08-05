@@ -3,7 +3,7 @@ export default class Header extends Component {
     render() {
       return (
         <header className="app-header">
-            <div className="app-header-title">Propellerhead Company Demo</div>
+            <div className="app-header-title">PH Company Demo</div>
         </header>
         );
     }

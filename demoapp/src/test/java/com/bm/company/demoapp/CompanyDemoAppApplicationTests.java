@@ -1,16 +1,23 @@
 package com.bm.company.demoapp;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.bm.company.demoapp.web.controllers.CustomerController;
+
+
 @SpringBootTest
 public class CompanyDemoAppApplicationTests {
-
+	
+	@Autowired
+	private CustomerController customerController;
+	
 	@Test
 	public void contextLoads() {
+		assertThat(customerController).isNotNull();
 	}
 
 }
