@@ -26,7 +26,7 @@ The backend app with its `README.md` can be found [here](demoapp/)
 This application has been hosted on ec2. Please visit [here](http://ec2-3-106-139-242.ap-southeast-2.compute.amazonaws.com:3000/) to view the application.
 
 ## Swagger 
-The API definition can be found on [here] (swagger/customer_swagger.yaml/)
+The API definition can be found on [here](swagger/customer_swagger.yaml/)
 
 ## Postman Collection
 Postman collection along with the environment configuration files can be imported from [here] (postman/)
