@@ -87,6 +87,9 @@ class CustomerDetails extends Component {
     
       handleSaveNoteClick( customer ) {
         this.props.dispatch(customerActions.createNoteForCustomer( customer, this.state.newNoteContent ));
+        this.setState({
+            newNoteContent : ""
+        });
       }
 
       handleNewNotesChange(e) {
@@ -104,7 +107,7 @@ class CustomerDetails extends Component {
     return (
         <div id="customerDetails" className="align-left" >
             <Row>
-                <Col md="12" sm="12"  className= "mr-top-2" >
+                <Col md="12" sm="12"  className= "mr-top-1" >
                     <Link to="/" color="info"> Back to customers</Link>
                 </Col>
 
@@ -129,7 +132,7 @@ class CustomerDetails extends Component {
             </Modal>        
         
             {customers && customers.item &&
-                <Card className="mr-top-2 align-left">
+                <Card className="mr-top-1 align-left">
                     <CardHeader>
 
                         <strong> Customer Details </strong>
@@ -157,7 +160,7 @@ class CustomerDetails extends Component {
                                 </Row>
                                 <Row className="mr-top-2">
                                     <Col md="3" sm="12">
-                                        Status
+                                        <strong>Status</strong>
                                     </Col>
                                     <Col md="9" sm="12">
                                         <Dropdown group isOpen={this.state.statusDropDownOpen} size="md" toggle={this.toggleStatusDropDown}>  
@@ -166,7 +169,7 @@ class CustomerDetails extends Component {
                                                     switch ( customers.item.status ) {
                                                     case 'PROSPECTIVE': return 'Prospective';
                                                     case 'CURRENT': return 'Current';
-                                                    case 'NON-ACTIVE': return 'Non-active';
+                                                    case 'NON_ACTIVE': return 'Non-active';
                                                     default : return 'PROSPECTIVE';
                                                     }
                                                 })()}
@@ -174,7 +177,7 @@ class CustomerDetails extends Component {
                                             <DropdownMenu>                                          
                                                 <DropdownItem onClick={()=> { this.handleStatusChange( customers.item, 'PROSPECTIVE') }}>Prospective</DropdownItem>
                                                 <DropdownItem onClick={()=> { this.handleStatusChange( customers.item, 'CURRENT') }}>Current</DropdownItem>
-                                                <DropdownItem onClick={()=> { this.handleStatusChange( customers.item, 'NON-ACTIVE') }}>Non-active</DropdownItem>
+                                                <DropdownItem onClick={()=> { this.handleStatusChange( customers.item, 'NON_ACTIVE') }}>Non-active</DropdownItem>
                                             </DropdownMenu>
                                         </Dropdown>
                                     </Col>

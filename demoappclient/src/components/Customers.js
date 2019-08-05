@@ -98,11 +98,12 @@ import { customerActions } from '../actions/customerActions';
                   <Col md="3" xs="12" className="align-right">
                     <Dropdown group isOpen={this.state.filterDropdownOpen} size="md" toggle={this.toggleFilterDropDown}  className="mr-left-1 mr-right-2">  
                       <DropdownToggle caret>
+                        {/* TODO: Get the status list to get from server */}
                       {(() => {
                             switch ( selectedStatus ) {
                               case 'PROSPECTIVE': return 'Prospective';
                               case 'CURRENT': return 'Current';
-                              case 'NON-ACTIVE': return 'Non-active';
+                              case 'NON_ACTIVE': return 'Non-active';
                               default  : return 'All Statuses';
                             }
                           })()}
@@ -111,7 +112,7 @@ import { customerActions } from '../actions/customerActions';
                           <DropdownItem onClick={()=> { this.handleStatusFilterChange('') }}>All Statuses</DropdownItem>
                           <DropdownItem onClick={()=> { this.handleStatusFilterChange('PROSPECTIVE') }}>Prospective</DropdownItem>
                           <DropdownItem onClick={()=> { this.handleStatusFilterChange('CURRENT') }}>Current</DropdownItem>
-                          <DropdownItem onClick={()=> { this.handleStatusFilterChange('NON-ACTIVE') }}>Non-active</DropdownItem>
+                          <DropdownItem onClick={()=> { this.handleStatusFilterChange('NON_ACTIVE') }}>Non-active</DropdownItem>
                       </DropdownMenu>
                     </Dropdown>
                     <Dropdown group isOpen={this.state.sortDropdownOpen} size="md" data-toggle="dropdown" toggle={this.toggleSortDropDown}>
@@ -159,7 +160,7 @@ import { customerActions } from '../actions/customerActions';
                 <td>{customer.emailAddress}</td>
                 <td>{customer.contactNumber}</td>
                 <td>{customer.address}</td>
-                <td><Moment>{customer.creationDate}</Moment></td>
+                <td><Moment format="DD-mm-YYYY hh:mm a">{customer.creationDate}</Moment></td>
               </tr>
             
         )}
